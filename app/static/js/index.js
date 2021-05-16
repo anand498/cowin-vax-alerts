@@ -53,6 +53,10 @@ function resetSelection() {
 }
 
 
+function subscribeUser() {
+    UserAction()
+    return false;
+}
 async function UserAction(){
    
     var name=document.getElementById("customer-name").value;
@@ -65,6 +69,7 @@ async function UserAction(){
     else if(document.getElementById('above45').checked) {
                 agegroup="above45";
     }    
+    
 
     let response=  await fetch("/cowin/subscribemail", {
     method: "POST",

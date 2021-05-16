@@ -3,17 +3,16 @@
 {% block content %}
 
 
-    <center >
-	
-      	<form class="container-fluid card p-5 pb-4 mt-4 mb-5 shadow my-auto" >
+    <center class="form-container" >
+      	<form class="container-fluid card p-5 pb-4 mt-4 mb-5 shadow my-auto bg" onsubmit=" return subscribeUser()" >
 			
 			<div class="form-floating mb-4 form-group">
-					<input type="text" class="form-control" id="customer-name"  placeholder="Your Name " required>
+					<input type="text" class="form-control" id="customer-name"  placeholder=" Name" required>
 					<label for="customer-name">Name</label>
 			</div>
 			
 			<div class="form-floating mb-4 form-group">
-					<input type="email" class="form-control" id="customer-emailid" placeholder="Your Email Address" required>
+					<input type="email" class="form-control" id="customer-emailid" placeholder=" Email Address" required>
 					<label for="customer-emailid">Email Address</label>
 						<!--<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>-->
 			</div>
@@ -59,8 +58,6 @@
 			</select>
 			<select class="form-select form-select-md mb-3"   id="districtSelect" aria-label=".form-select-lg example" required>
 					<option selected>Select District</option>
-					
-					<option value="" disabled selected>Choose District</option>
 					<option></option>
 			</select>
 			
@@ -76,26 +73,24 @@
 			</div>
 							
 			<div class="landing-wrap">
-				<button type="submit" class="landing-submit btn btn-primary" onsubmit="UserAction()">Submit</button>
+				<button type="submit" class="landing-submit btn btn-primary" id="btnSubmit">Submit</button>
 			</div>
-			<div class="about-text3">This tool is created to help you get 
-			vaccinated by giving you real time email alerts whenever a vaccination slot 
-			opens up in your district</div>
-			<div>
-
+			
+			<div class="about-text3">This initiative is taken to help you get 
+				vaccinated by giving you real time <strong>Email Alerts</strong> whenever a vaccination slot 
+				opens up in your district
 			</div>
+			<a href="{{ url_for('static', path='/html/howdoesitwork.html') }}" target="_blank">How does it work?</a>
 
     	</form>
-    	
-		<br><br><br>
 		<br>
-		<small>Developed by: <a href="https://github.com/anand498" target="_blank">@anand498</a></small>
+		<br><br>
+		<div>
+				
+				<small>Developed by: <a href="https://github.com/anand498" target="_blank">@anand498</a></small><br>
+				<small>Contact us  <a href="mailto:myvaccinetracker@gmail.com" target="_blank">Here</a></small>
+			</div>
 		
-		<br>
-
     </center>
-
-
-
 
 {% endblock %}
