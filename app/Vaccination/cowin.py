@@ -18,6 +18,9 @@ def subscribeuser(userdetails):
     district=userdetails.district
     state=userdetails.state
     agegroup=userdetails.agegroup
+    if name=="" or email =="" or name is None or email is None:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST,content=jsonresponse('400','Error','Payload in Invalid'))
+
     record={
         "name": str(name),
         "email": str(email),
