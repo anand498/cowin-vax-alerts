@@ -1,11 +1,9 @@
-from sqlalchemy.orm import Session
 from fastapi import APIRouter,Depends, Request
 from fastapi.responses import JSONResponse
 from app.config import schemas
 from app.Vaccination.cowin import *
 from fastapi.templating import Jinja2Templates
-# from app.Vaccination.model import VaccineModel
-route = APIRouter(prefix="/cowin")
+route = APIRouter(prefix="/vax-alerts")
 
 templates = Jinja2Templates(directory="app/templates")
 

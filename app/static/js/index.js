@@ -71,7 +71,7 @@ async function UserAction(){
     }    
     
 
-    let response=  await fetch("/cowin/subscribemail", {
+    let response=  await fetch("/vax-alerts/subscribemail", {
     method: "POST",
     body: JSON.stringify({
         "name":name,
