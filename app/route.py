@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from app.config import schemas
 from app.Vaccination.cowin import *
 from fastapi.templating import Jinja2Templates
-route = APIRouter(prefix="/vax-alerts")
+route = APIRouter()
 
 templates = Jinja2Templates(directory="app/templates")
 
@@ -14,7 +14,7 @@ async def homepage(request:Request):
     return templates.TemplateResponse("home.html", {
         "request": request})
 
-@route.post("/subscribemail")
+@route.post("/vax-alerts")
 async def subscribeMail(request:Request,userdata:schemas.addUser):
     response=subscribeuser(userdata)
     return response
