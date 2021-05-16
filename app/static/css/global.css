@@ -1,0 +1,51 @@
+
+.container-fluid{
+	
+	position: absolute;
+	top: 15vh;
+	box-shadow: 0px 0px 10px 0px rgb(99, 91, 91);
+	border-radius:10px;
+	top:5vh;
+	max-width: 30rem; 
+}
+.age-group-label{
+	margin-left: 90px;
+}
+.form-check-inline{
+	margin-left: 130px;
+}
+
+.landing-wrap {
+    height: 4.5em;
+    border-top: 0;
+    text-align: center;
+}
+.landing-submit {
+    font-weight: bold;
+    background: #4e73d8;
+    color: white;
+    border: #d84e55;
+    width: 90%;
+    height: 3em;
+    margin: 0.9em 0em 0.5em 0em;
+    border-radius: 0.3em;
+    font-size: 0.95em;
+}
+.about-text3 {
+    font-size: 0.8em;
+    margin: 1.9em;
+    text-align: center;
+    color: #3e3e52;
+}
+.bg{
+	background: #90ac87;
+	height: 100%;
+	width: 100%;
+	background-size: 200%;
+}
+
+@media only screen and (max-width:678px){
+	.bg{
+		background-size: 300%;
+	}
+}
