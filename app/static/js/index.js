@@ -60,36 +60,11 @@ async function UserAction(){
     var state = document.getElementById('stateSelect').value;
     var district = document.getElementById('districtSelect').value;
     if(document.getElementById('below45').checked) {
-        $agegroup="below45";
+        agegroup="below45";
     }
     else if(document.getElementById('above45').checked) {
-                $agegroup="above45";
-    }
-    console.log(name);
-    if (name == "") {
-        Swal.fire({
-            icon: 'error',
-            title: 'Name is Empty',
-            text: 'Retry again',
-        })
-        return false;
-    }
-    var mailformat = '/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if(emailid.match(mailformat))
-    {
-        console.log("Valid email address!");
-       
-    }
-    else
-    {
-        Swal.fire({
-            icon: 'error',
-            title: 'Email is Invalid',
-            text: 'Retry again',
-        })
-        return false;
-    }
-    
+                agegroup="above45";
+    }    
 
     let response=  await fetch("/cowin/subscribemail", {
     method: "POST",
