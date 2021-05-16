@@ -12,6 +12,5 @@ ENV=config_parser.get('APP','ENV')
 HOST=config_parser.get(ENV,'HOST')
 PORT=int(config_parser.get(ENV,'PORT'))
 DEBUGMODE=config_parser.get(ENV,'DEBUGMODE')
-DATABASE_URL=str(config_parser.get(ENV,'DATABASE_URL'))
 
 

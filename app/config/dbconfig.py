@@ -1,6 +1,6 @@
 from pymongo import MongoClient
-import ssl
+import ssl,os
 
-DB="cowin_notify"
-COLLECTION_NAME="beneficiary"
-client = MongoClient("mongodb+srv://cowinuser:ctVrOatUQFpYoasy@cluster0.ggvx1.mongodb.net/cowin_notify?retryWrites=true&w=majority",ssl_cert_reqs=ssl.CERT_NONE)
+DB=os.environ['DATABASE_NAME']
+COLLECTION_NAME=os.environ['COLLECTION_NAME']
+client = MongoClient(os.environ['DB_URL'],ssl_cert_reqs=ssl.CERT_NONE)
