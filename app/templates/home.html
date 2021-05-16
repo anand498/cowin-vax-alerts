@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+    <center >
+	
+      	<div class="container-fluid card p-5 pb-4 mt-4 mb-5 shadow my-auto">
+			
+			<div class="form-floating mb-4">
+						<input type="text" class="form-control" id="customer-name" placeholder="Your Name">
+						<label for="floatingInput">Name</label>
+			</div>
+			<div class="form-floating mb-4">
+					<input type="email" class="form-control" id="customer-emailid" placeholder="Your Email Address" oninvalid="this.setCustomValidity('Please Enter valid email')">
+					<label for="floatingInput">Email Address</label>
+						<!--<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>-->
+			</div>
+
+			<select class="form-select form-select-md mb-3" id="stateSelect" aria-label=".form-select-lg example" onchange="makeSubmenu(this.value)" >
+						<option value="" disabled selected>Select State</option>
+						<option>Andhra Pradesh</option>
+						<option>Arunachal Pradesh</option>
+						<option>Assam</option>
+						<option>Bihar</option>
+						<option>Chandigarh</option>
+						<option>Chhattisgarh</option>
+						<option>Dadra and Nagar Haveli</option>
+						<option>Daman and Diu</option>
+						<option>Delhi</option>
+						<option>Goa</option>
+						<option>Gujarat</option>
+						<option>Haryana</option>
+						<option>Himachal Pradesh</option>
+						<option>Jammu and Kashmir</option>
+						<option>Jharkhand</option>
+						<option>Karnataka</option>
+						<option>Kerala</option>
+						<option>Ladakh</option>
+						<option>Lakshadweep</option>
+						<option>Madhya Pradesh</option>
+						<option>Maharashtra</option>
+						<option>Manipur</option>
+						<option>Meghalaya</option>
+						<option>Mizoram</option>
+						<option>Nagaland</option>
+						<option>Odisha</option>
+						<option>Puducherry</option>
+						<option>Punjab</option>
+						<option>Rajasthan</option>
+						<option>Sikkim</option>
+						<option>Tamil Nadu</option>
+						<option>Telangana</option>
+						<option>Tripura</option>
+						<option>Uttar Pradesh</option>
+						<option>Uttarakhand</option>
+						<option>West Bengal</option>
+			</select>
+			<select class="form-select form-select-md mb-3"   id="districtSelect" aria-label=".form-select-lg example" >
+					<option selected>Select District</option>
+					<!--<option value="" disabled selected>Choose District</option>-->
+					<option></option>
+			</select>
+			
+			<label class="form-check-label">Your Age</label>
+  
+			<div class="form-check">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="below45" checked value="option1">
+					<label class="form-check-label" for="below45">Below 45 years</label>
+			</div>
+			<div class="form-check">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="above45" value="option2">
+					<label class="form-check-label" for="above45">Above 45 years</label>
+			</div>
+							
+			<div class="landing-wrap">
+				<input type="button" class="landing-submit" onclick="UserAction()" value="SUBMIT"></button>
+			</div>
+			<div class="about-text3">This tool is created to help you get 
+			vaccinated by giving you real time email alerts whenever a vaccination slot 
+			opens up in your district</div>
+			<div>
+
+			</div>
+
+    	</div>
+    	
+		<br><br><br>
+		<small>Developed by: <a href="https://github.com/anand498" target="_blank">@anand498</a></small>
+		
+		<br>
+
+    </center>
+
+
+
+
+{% endblock %}
