@@ -5,10 +5,9 @@ async-generator==1.10
 certifi==2020.12.5
 chardet==4.0.0
 click==7.1.2
-dataclasses==0.8
 dnspython==2.1.0
 fastapi==0.63.0
-greenlet==1.0.0
+greenlet
 h11==0.12.0
 idna==2.10
 importlib-metadata==4.0.1
