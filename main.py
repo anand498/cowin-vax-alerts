@@ -16,6 +16,6 @@ app.mount(
 )
 app.add_middleware(HTTPSRedirectMiddleware)
 app.add_middleware(
-    TrustedHostMiddleware, allowed_hosts=["myvaccinetracker.in", "*.myvaccinetracker.in"]
+    TrustedHostMiddleware, allowed_hosts=["myvaccinetracker.in", "*.myvaccinetracker.in","myvaccinetracker.herokuapp.com"]
 )
 app.include_router(route, tags=["Vaccine Tracker"])
