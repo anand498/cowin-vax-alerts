@@ -57,6 +57,43 @@ function subscribeUser() {
     UserAction()
     return false;
 }
+function unsubscribeUser(){
+    deleteUser()
+    return false;
+}
+
+async function deleteUser()
+{
+    var emailid = document.getElementById('unsubscribe-customer-emailid').value;
+    let response=  await fetch("/unsubscribeMail", {
+        method: "DELETE",
+        body: JSON.stringify({
+            "email":emailid,
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+        })
+
+        if (response.status=='200') { 
+            let json =  await response.json();
+            Swal.fire(
+                'Congratulations!',
+                'Your unsubscribe request has been processed!',
+                'success'
+            )
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Email ID does not exist!',
+                footer: response.status
+            })
+        }
+        
+
+}
+
 async function UserAction(){
    
     var name=document.getElementById("customer-name").value;
@@ -70,7 +107,6 @@ async function UserAction(){
                 agegroup="above45";
     }    
     
-
     let response=  await fetch("/vax-alerts", {
     method: "POST",
     body: JSON.stringify({
@@ -84,11 +120,11 @@ async function UserAction(){
         "Content-type": "application/json; charset=UTF-8"
     }
     })
-    if (response.ok) { 
+    if (response.status=='200') { 
         let json =  await response.json();
         Swal.fire(
             'Congratulations!',
-            'You have been registered for regular updates!',
+            'You have registered for Vaccination Alerts!',
             'success'
         )
     } else {
@@ -98,6 +134,11 @@ async function UserAction(){
             text: 'Something went wrong!',
             footer: response.status
         })
-    }
+    }        
+    
+
     };
 
+    
+
+   
