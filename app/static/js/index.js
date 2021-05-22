@@ -78,8 +78,8 @@ async function deleteUser()
         if (response.status=='200') { 
             let json =  await response.json();
             Swal.fire(
-                'Congratulations!',
-                'Your unsubscribe request has been processed!',
+                'Your request has been processed.',
+                'You will recieve a confirmation mail shortly.',
                 'success'
             )
         } else {
@@ -123,8 +123,8 @@ async function UserAction(){
     if (response.status=='200') { 
         let json =  await response.json();
         Swal.fire(
-            'Congratulations!',
             'You have registered for Vaccination Alerts!',
+            'You will recieve a confirmation mail shortly.',
             'success'
         )
     } else {
