@@ -2,22 +2,23 @@
 
 {% block content %}
 
-
     <center class="form-container" >
-      	<form class="container-fluid card p-5 pb-4 mt-4 mb-5 shadow my-auto bg" onsubmit=" return subscribeUser()" >
-			
-			<div class="form-floating mb-4 form-group">
+      	<form class="container-fluid card p-2 pb-5 mt-4 mb-5 shadow my-auto bg" onsubmit=" return subscribeUser()" >
+			<div>  
+			<div class="title-text3">Email Alerts for Vaccines</div>
+			</div>
+			<div class="form-floating mb-2 form-group">
 					<input type="text" class="form-control" id="customer-name"  placeholder=" Name" required>
 					<label for="customer-name">Name</label>
 			</div>
 			
-			<div class="form-floating mb-4 form-group">
+			<div class="form-floating mb-2 form-group">
 					<input type="email" class="form-control" id="customer-emailid" placeholder=" Email Address" required>
 					<label for="customer-emailid">Email Address</label>
-						<!--<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>-->
 			</div>
 
-			<select class="form-select form-select-md mb-3" id="stateSelect" aria-label=".form-select-lg example" onchange="makeSubmenu(this.value)" required>
+			<select class="form-select form-select-md mb-2" id="stateSelect" aria-label=".form-select-lg example" onchange="makeSubmenu(this.value)" required>
+			<label for="stateSelect">Email Address</label>
 						<option value="" disabled selected>Select State</option>
 						<option>Andhra Pradesh</option>
 						<option>Arunachal Pradesh</option>
@@ -56,22 +57,20 @@
 						<option>Uttarakhand</option>
 						<option>West Bengal</option>
 			</select>
-			<select class="form-select form-select-md mb-3"   id="districtSelect" aria-label=".form-select-lg example" required>
+			<select class="form-select form-select-md mb-3" id="districtSelect" aria-label=".form-select-lg example" required>
 					<option selected>Select District</option>
 					<option></option>
 			</select>
 			
-			<label class="form-check-label">Your Age</label>
-  
+			<label class="form-check-label">Age Group</label>
+
+			
 			<div class="form-check">
 					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="below45"  value="option1" required>
-					<label class="form-check-label" for="below45">Below 45 years</label>
-			</div>
-			<div class="form-check">
+					<label class="form-check-label" for="below45">18-45</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="above45" value="option2" required>
-					<label class="form-check-label" for="above45">Above 45 years</label>
+					<label class="form-check-label" for="above45">45+</label>
 			</div>
-							
 			<div class="landing-wrap">
 				<button type="submit" class="landing-submit btn btn-primary" id="btnSubmit">Submit</button>
 			</div>
@@ -80,17 +79,43 @@
 				vaccinated by giving you real time <strong>Email Alerts</strong> whenever a vaccination slot 
 				opens up in your district
 			</div>
-			<a href="{{ url_for('static', path='/html/howdoesitwork.html') }}" target="_blank">How does it work?</a>
-
+			<a href="{{ url_for('static', path='/html/howdoesitwork.html') }}" target="_self">How does it work?</a>
     	</form>
-		<br>
-		<br><br>
+		
+		<br><br><br><br>
+		<div class="footer-text">
+			To unsubscribe, click <a href="#" data-toggle="modal" data-target="#exampleModal">Here</a><br>
 		<div>
-				
-				<small>Developed by: <a href="https://github.com/anand498" target="_blank">@anand498</a></small><br>
-				<small>Contact us  <a href="mailto:myvaccinetracker@gmail.com" target="_blank">Here</a></small>
+			<div  class="footer-text">
+				Developed by: <a href="https://linkedin.com/anand498" target="_blank">Anand Pandey</a><br>
 			</div>
 		
     </center>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Unsubscribe Mail Request</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit=" return unsubscribeUser()" >
+         	<div class="form-floating mb-2 form-group">
+				<input type="email" class="form-control" id="unsubscribe-customer-emailid" placeholder="Email Address" required>
+				<label for="unsubscribe-customer-emailid">Email Address</label>
+			</div>
+        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        	<button type="submit" class="btn btn-primary">Unsubscribe</button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
 
 {% endblock %}
