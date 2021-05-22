@@ -30,8 +30,10 @@ def subscribeuser(userdetails):
     district=userdetails.district
     state=userdetails.state
     agegroup=userdetails.agegroup
+    db=app_config.DB
+    collectionname=app_config.COLLECTION_NAME
     districtid=df_districts.loc[df_districts['District_Name'] == district, 'District_ID'].iloc[0]
-    if name=="" or email =="" or agegroup =="" or state =="" or name is None or email is None or agegroup is None or state is None :
+    if name.isspace() == True or email.isspace()==True  or agegroup =="" or state =="" or name is None or email is None or agegroup is None or state is None :
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST,content=jsonresponse('400','Error - Payload in Invalid'))
     record={
         "name": str(name),
@@ -42,13 +44,16 @@ def subscribeuser(userdetails):
         "age":str(agegroup),
         "createdDateTime":str(datetime.now().replace(microsecond=0))
     }
+    db = client[db]
+    coll = db[collectionname]
+    myquery = {"email":email,"name":name,"district_name":district,"age":agegroup}
+    if coll.find(myquery).count() > 0:
+        return JSONResponse(status_code=status.HTTP_403_FORBIDDEN,content=jsonresponse('403','Entry against value already exists'))
     
-    user_collection = client[app_config.DB][app_config.COLLECTION_NAME]
-    result = user_collection.insert_one(record)
+    result = coll.insert_one(record)
     ack = result.acknowledged
     if (ack==True):
-        sendconfirmationmail(email,record)
-        return JSONResponse(status_code=status.HTTP_200_OK,content=jsonresponse('200','User Subscribed'))
+        return JSONResponse(status_code=status.HTTP_201_CREATED,content=jsonresponse('201','User Subscribed'))
 
 
 def sendconfirmationmail(receiver,record):
@@ -77,10 +82,11 @@ def sendconfirmationmail(receiver,record):
             <p>Here are the details captured by My Vaccine Tracker</p>
             {{table}}
             <br>
+            <br>
             <p> To Book your Slot on Cowin, Click <a href="https://selfregistration.cowin.gov.in/">Here</a></p>
             <p>Thanks,</p>
             <p>My Vaccine Tracker Team</p>
-            <center> Developed by:<a href="https://www.linkedin.com/in/anand498/" target="_blank">anand498</a></center>
+            <center> Developed by:<a href="https://www.linkedin.com/in/anand498/" target="_blank">Anand Pandey</a></center>
             </html>
             """  
     message.attach(MIMEText(Environment().from_string(VACCINE_TEMPLATE).render(name=str(name),district_name=district_name,table=data), "html"))
@@ -121,11 +127,11 @@ def sendconfirmationmaildelete(receiver,name):
             <html>
             <h4>Hi, {{name}}!</h4>
             <p>You have been unsubscribed from receiving any further updates. </p>
-            <p>If you would like to state the reason for your unsubscription please click <a href="https://forms.gle/FeDmaN9opKGzZAf3A">Here</a>
+            <p>If you would like to share the reason for your unsubscription, please click <a href="https://forms.gle/FeDmaN9opKGzZAf3A">Here</a>
             <br>
             <p>Thanks,</p>
             <p>My Vaccine Tracker Team</p>
-            <center> Developed by:<a href="https://www.linkedin.com/in/anand498/" target="_blank">anand498</a></center>
+            <center> Developed by:<a href="https://www.linkedin.com/in/anand498/" target="_blank">Anand Pandey</a></center>
             </html>
             """  
     message.attach(MIMEText(Environment().from_string(VACCINE_TEMPLATE).render(name=str(name)), "html"))
