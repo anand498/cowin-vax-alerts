@@ -30,3 +30,4 @@ zipp==3.4.1
 uvloop
 httptools
 pretty-html-table
+icecream
