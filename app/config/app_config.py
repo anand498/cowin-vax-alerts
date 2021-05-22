@@ -12,5 +12,11 @@ ENV=config_parser.get('APP','ENV')
 HOST=config_parser.get(ENV,'HOST')
 PORT=int(config_parser.get(ENV,'PORT'))
 DEBUGMODE=config_parser.get(ENV,'DEBUGMODE')
-
+EMAIL_HOST = config_parser.get(ENV,'EMAIL_HOST')
+EMAIL_HOST_USER = config_parser.get(ENV,'EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config_parser.get(ENV,'EMAIL_HOST_PASSWORD')
+EMAIL_PORT = config_parser.get(ENV,'EMAIL_PORT')
+DB = config_parser.get(ENV,'DB')
+COLLECTION_NAME = config_parser.get(ENV,'COLLECTION_NAME')
+DB_URL = config_parser.get(ENV,'DB_URL')
 

@@ -19,7 +19,7 @@ async def subscribeMail(request:Request,userdata:schemas.addUser):
     response=subscribeuser(userdata)
     return response
 
-@route.delete("/deleteRecord")
+@route.delete("/unsubscribeMail")
 async def deleteRecord(request:Request,userdata:schemas.deleteUser):
     response=deleteuser(userdata)
     return response
