@@ -26,6 +26,7 @@
     'Uttarakhand': ['Almora', 'Bageshwar', 'Chamoli', 'Champawat', 'Dehradun', 'Haridwar', 'Nainital', 'Pauri Garhwal', 'Pithoragarh', 'Rudraprayag', 'Tehri Garhwal', 'Udham Singh Nagar', 'Uttarkashi'],
     'West Bengal': ['Alipurduar District', 'Bankura', 'Basirhat HD (North 24 Parganas)', 'Birbhum', 'Bishnupur HD (Bankura)', 'Cooch Behar', 'COOCHBEHAR', 'Dakshin Dinajpur', 'Darjeeling', 'Diamond Harbor HD (S 24 Parganas)', 'East Bardhaman', 'Hoogly', 'Howrah', 'Jalpaiguri', 'Jhargram', 'Kalimpong', 'Kolkata', 'Malda', 'Murshidabad', 'Nadia', 'Nandigram HD (East Medinipore)', 'North 24 Parganas', 'Paschim Medinipore', 'Purba Medinipore', 'Purulia', 'Rampurhat HD (Birbhum)', 'South 24 Parganas', 'Uttar Dinajpur', 'West Bardhaman']}
 
+ 
 
 function makeSubmenu(value) {
     if(value.length==0) 
@@ -53,6 +54,7 @@ function resetSelection() {
 }
 
 
+
 function subscribeUser() {
     UserAction()
     return false;
@@ -64,7 +66,16 @@ function unsubscribeUser(){
 
 async function deleteUser()
 {
+    
     var emailid = document.getElementById('unsubscribe-customer-emailid').value;
+    if (!emailid.replace(/\s/g, '').length) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Email entered is Invalid',
+         } )
+        return false;
+    }
     let response=  await fetch("/unsubscribeMail", {
         method: "DELETE",
         body: JSON.stringify({
@@ -86,8 +97,7 @@ async function deleteUser()
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Email ID does not exist!',
-                footer: response.status
+                text: 'Email ID does not exist in our records.',
             })
         }
         
@@ -100,6 +110,24 @@ async function UserAction(){
     var emailid = document.getElementById('customer-emailid').value;
     var state = document.getElementById('stateSelect').value;
     var district = document.getElementById('districtSelect').value;
+    if (!name.replace(/\s/g, '').length) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Name entered is Invalid',
+         } )
+        return false;
+    }
+    if (!emailid.replace(/\s/g, '').length) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Email entered is Invalid',
+         } )
+        return false;
+    }
+    
+    
     if(document.getElementById('below45').checked) {
         agegroup="below45";
     }
@@ -120,21 +148,28 @@ async function UserAction(){
         "Content-type": "application/json; charset=UTF-8"
     }
     })
-    if (response.status=='200') { 
+    if (response.status=='201') { 
         let json =  await response.json();
-        Swal.fire(
-            'You have registered for Vaccination Alerts!',
-            'You will recieve a confirmation mail shortly.',
-            'success'
-        )
-    } else {
+        Swal.fire({
+            icon: 'success',
+            title: 'You have registered for Vaccination Alerts!',
+            text: 'You will recieve a confirmation mail shortly.',
+        })
+    } else if(response.status=='403') {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong!',
-            footer: response.status
+            text: 'You have only registered for a similar request!',
         })
-    }        
+    }
+        else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong',
+            })
+        }
+          
     
 
     };
