@@ -13,6 +13,19 @@ import ssl,os
 from pretty_html_table import build_table
 from icecream import ic
 from datetime import datetime
+import logging
+from time import sleep
+import pytz
+from pytz import timezone
+
+logger=logging.getLogger() 
+logger.setLevel(logging.INFO) 
+
+def timetz(*args):
+    return datetime.now(tz).timetuple()
+
+tz = timezone('Asia/Kolkata') 
+logging.Formatter.converter = timetz
 df_districts=pd.read_csv("app/static/DistrictListwithstates.csv")
 client = MongoClient(app_config.DB_URL,ssl_cert_reqs=ssl.CERT_NONE)
 
@@ -34,6 +47,7 @@ def subscribeuser(userdetails):
     collectionname=app_config.COLLECTION_NAME
     districtid=df_districts.loc[df_districts['District_Name'] == district, 'District_ID'].iloc[0]
     if name.isspace() == True or email.isspace()==True  or agegroup =="" or state =="" or name is None or email is None or agegroup is None or state is None :
+        logger.error("Invalid request")
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST,content=jsonresponse('400','Error - Payload in Invalid'))
     record={
         "name": str(name),
@@ -42,17 +56,22 @@ def subscribeuser(userdetails):
         "district_name":str(district),
         "district_id":str(districtid),
         "age":str(agegroup),
-        "createdDateTime":str(datetime.now().replace(microsecond=0))
+        "createdDateTime":str(datetime.now(tz).replace(microsecond=0))
     }
     db = client[db]
     coll = db[collectionname]
     myquery = {"email":email,"name":name,"district_name":district,"age":agegroup}
     if coll.find(myquery).count() > 0:
+        logger.error("Already Exists Name: "+str(name))
         return JSONResponse(status_code=status.HTTP_403_FORBIDDEN,content=jsonresponse('403','Entry against value already exists'))
     
     result = coll.insert_one(record)
+    collection_name_bkp=app_config.COLLECTION_NAME_BKP
+    coll2=db[collection_name_bkp]
+    result2=coll2.insert_one(record)
     ack = result.acknowledged
     if (ack==True):
+        logger.info("Registration success for Beneficiary Name: "+name+" Email: "+email+" district_name: "+district+" age-group: "+agegroup)
         return JSONResponse(status_code=status.HTTP_201_CREATED,content=jsonresponse('201','User Subscribed'))
 
 
@@ -96,6 +115,7 @@ def sendconfirmationmail(receiver,record):
     server.starttls()
     server.login(app_config.EMAIL_HOST_USER, app_config.EMAIL_HOST_PASSWORD)
     server.sendmail(message['From'], message['To'], msg_body)
+    logger.info("Registration Confirmation Mail Sent to: "+name+" at Email: "+str(receiver))
     server.quit()
 
 def deleteuser(userdetails):
@@ -114,6 +134,7 @@ def deleteuser(userdetails):
     else:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST,content=jsonresponse('400','User Does not Exist'))
     sendconfirmationmaildelete(email,name)
+    logger.info("Beneficiary Deleted Name:"+str(name)+" Email: "+str(email))
     return JSONResponse(status_code=status.HTTP_200_OK,content=jsonresponse('200','User Deleted'))
 
 
@@ -141,6 +162,7 @@ def sendconfirmationmaildelete(receiver,name):
     server.starttls()
     server.login(app_config.EMAIL_HOST_USER, app_config.EMAIL_HOST_PASSWORD)
     server.sendmail(message['From'], message['To'], msg_body)
+    logger.info("Deletion Confirmation Mail Sent to: "+name+" at Email: "+receiver)
     server.quit()
 
 
