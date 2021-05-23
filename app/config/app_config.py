@@ -18,5 +18,6 @@ EMAIL_HOST_PASSWORD = config_parser.get(ENV,'EMAIL_HOST_PASSWORD')
 EMAIL_PORT = config_parser.get(ENV,'EMAIL_PORT')
 DB = config_parser.get(ENV,'DB')
 COLLECTION_NAME = config_parser.get(ENV,'COLLECTION_NAME')
+COLLECTION_NAME_BKP=config_parser.get(ENV,'COLLECTION_NAME_BKP')
 DB_URL = config_parser.get(ENV,'DB_URL')
 
