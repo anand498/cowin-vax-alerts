@@ -40,7 +40,7 @@ html,body {
     font-size: 0.95em;
 } 
 .about-text3 {
-    font-size: 0.9em;
+    font-size: 1em;
     margin: 0.9em;
     text-align: center;
     color: #3e3e52;
@@ -55,14 +55,14 @@ html,body {
     color: #3e3e52;
 }
 .title-text3 {
-    font-size: 1.8em;
+    font-size: 1.5em;
     margin: 0.2em;
     text-align: center;
     color: #3e3e52;
 }
 .footer-text{
 	font-size: 0.9em;
-    margin: 0.2em;
+    margin: 0.1em;
     text-align: center;
     color: #3e3e52;
 }
