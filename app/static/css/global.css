@@ -13,9 +13,8 @@ html,body {
 .form-container{
 	margin-top: 7vh;
 	position: absolute;
-	/* background-color: #85878a; */
     font-family: "Fira Sans", Helvetica, Arial, sans-serif;
-	border-radius:10px;
+	border-radius:15px;
 	height: 550px;
 	width: 400px;
     
