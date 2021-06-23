@@ -65,7 +65,7 @@ def subscribeuser(userdetails):
         "age":str(agegroup),
         'confirmation_type':'register'
     }
-    invoke_response = app_config.lambda_client.invoke(FunctionName='mail_sender_confirmation',
+    invoke_response = app_config.lambda_client.invoke(FunctionName='Mail-Sender',
                                     InvocationType='Event',
                                     Payload=json.dumps(record))
     if (ack==True):
@@ -94,7 +94,7 @@ def deleteuser(userdetails):
         'name': str(name),
         'confirmation_type':'delete'
     }
-    invoke_response = app_config.lambda_client.invoke(FunctionName='mail_sender_confirmation',
+    invoke_response = app_config.lambda_client.invoke(FunctionName='Mail-Sender',
                                     InvocationType='Event',
                                     Payload=json.dumps(record))
     return JSONResponse(status_code=status.HTTP_200_OK,content=jsonresponse('200','User Deleted'))
