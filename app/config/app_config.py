@@ -9,9 +9,6 @@ config_parser.read(default_config_file)
 
 ENV=config_parser.get('APP','ENV')
 
-HOST=config_parser.get(ENV,'HOST')
-PORT=int(config_parser.get(ENV,'PORT'))
-DEBUGMODE=config_parser.get(ENV,'DEBUGMODE')
 DB = config_parser.get(ENV,'DB')
 COLLECTION_NAME = config_parser.get(ENV,'COLLECTION_NAME')
 COLLECTION_NAME_BKP=config_parser.get(ENV,'COLLECTION_NAME_BKP')
