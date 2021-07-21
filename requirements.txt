@@ -28,3 +28,4 @@ uvloop
 httptools
 pretty-html-table
 boto3
+gunicorn
