@@ -13,6 +13,7 @@ app.mount(
     StaticFiles(directory= "app/static"),
     name="static",
 )
+print("yes")
 # app.add_middleware(HTTPSRedirectMiddleware)
 # app.add_middleware(
 #     TrustedHostMiddleware, allowed_hosts=["myvaccinetracker.in", "*.myvaccinetracker.in","myvaccinetracker.herokuapp.com"]
